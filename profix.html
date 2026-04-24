@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Profix | Hire Any Labour — Electricians, Plumbers, Helpers & More</title>
+  <!-- Bootstrap 5 + Icons + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #0a2540;
+      overflow-x: hidden;
+    }
+
+    /* Custom color scheme: Blue (#0d6efd / #0a58ca) & White (#ffffff) */
+    :root {
+      --profix-blue: #0a66c2;
+      --profix-dark-blue: #084298;
+      --profix-light-blue: #eef4ff;
+      --profix-white: #ffffff;
+      --profix-gray: #f8fafc;
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(35px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes floatSoft {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    @keyframes pulseGlow {
+      0% { box-shadow: 0 0 0 0 rgba(10, 102, 194, 0.4); }
+      70% { box-shadow: 0 0 0 12px rgba(10, 102, 194, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(10, 102, 194, 0); }
+    }
+
+    @keyframes shimmer {
+      0% { background-position: -100% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .animate-fadeUp { animation: fadeUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards; }
+    .animate-slideLeft { animation: slideInLeft 0.7s ease forwards; }
+    .animate-slideRight { animation: slideInRight 0.7s ease forwards; }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      padding: 1rem 0;
+    }
+
+    .navbar-brand {
+      font-weight: 800;
+      font-size: 1.9rem;
+      letter-spacing: -0.5px;
+      color: var(--profix-blue) !important;
+    }
+
+    .navbar-brand span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      background: #eef2ff;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      margin-left: 6px;
+      vertical-align: middle;
+      color: var(--profix-blue);
+    }
+
+    .nav-link {
+      font-weight: 600;
+      color: #1e2a3e !important;
+      transition: 0.2s;
+    }
+    .nav-link:hover { color: var(--profix-blue) !important; transform: translateY(-2px); }
+
+    .btn-outline-custom {
+      border: 2px solid var(--profix-blue);
+      background: transparent;
+      color: var(--profix-blue);
+      font-weight: 600;
+      border-radius: 40px;
+      padding: 0.4rem 1.2rem;
+      transition: 0.3s;
+    }
+    .btn-outline-custom:hover { background: var(--profix-blue); color: white; transform: scale(1.02); }
+
+    .btn-primary-custom {
+      background: var(--profix-blue);
+      border: none;
+      border-radius: 50px;
+      padding: 0.7rem 1.8rem;
+      font-weight: 700;
+      transition: 0.25s;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+    .btn-primary-custom:hover { background: var(--profix-dark-blue); transform: translateY(-3px); box-shadow: 0 12px 20px rgba(10,102,194,0.25); }
+
+    /* Hero */
+    .hero-section {
+      background: linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+      padding: 5rem 0 4rem;
+    }
+
+    .hero-title {
+      font-weight: 800;
+      font-size: 3.2rem;
+      line-height: 1.2;
+    }
+    .blue-highlight { color: var(--profix-blue); border-bottom: 3px solid var(--profix-blue); display: inline-block; }
+
+    /* Search card */
+    .service-card {
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Labour category cards */
+    .labour-card {
+      border-radius: 28px;
+      background: white;
+      transition: all 0.25s ease;
+      border: 1px solid #eef2f6;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .labour-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px -12px rgba(10,102,194,0.2); border-color: var(--profix-blue); }
+    .cat-icon {
+      width: 70px;
+      height: 70px;
+      background: var(--profix-light-blue);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--profix-blue);
+    }
+
+    /* step circle */
+    .step-circle {
+      width: 55px;
+      height: 55px;
+      background: var(--profix-blue);
+      color: white;
+      font-weight: 800;
+      font-size: 1.5rem;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem auto;
+      box-shadow: 0 8px 14px rgba(10,102,194,0.25);
+    }
+
+    /* review cards */
+    .review-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 1.6rem;
+      box-shadow: 0 12px 25px -8px rgba(0,0,0,0.05);
+      border: 1px solid #eef2ff;
+      transition: all 0.2s;
+    }
+    .review-card:hover { transform: scale(1.01); border-color: #cddeff; }
+    .stars { color: #ffb800; letter-spacing: 2px; }
+
+    footer {
+      background: #0a2540;
+      color: #ccddee;
+    }
+    .floating-icon { animation: floatSoft 3s infinite ease-in-out; }
+    .pulse-btn { animation: pulseGlow 2s infinite; }
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: 2.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">profix<span>Every Problem's Solution At Your Doorstep</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarMain">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center gap-2">
+        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#labours">All Labours</a></li>
+        <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+        <li class="nav-item"><a class="nav-link" href="#howitworks">How it works</a></li>
+        <li class="nav-item"><a class="btn btn-outline-custom ms-2" href="#">Sign In</a></li>
+        <li class="nav-item"><a class="btn btn-primary-custom text-white ms-2" href="#">Post a Job</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 animate-fadeUp">
+        <div class="bg-white d-inline-block px-3 py-1 rounded-pill shadow-sm mb-3"><i class="fas fa-hard-hat text-primary me-1"></i> Pakistan's largest labour marketplace</div>
+        <h1 class="hero-title">Hire any <span class="blue-highlight">labour</span> — electricians, plumbers, carpenters, helpers & more</h1>
+        <!-- <p class="lead mt-3 text-secondary">Just like Uber & Foodpanda — but for every type of skilled & unskilled worker. Reliable, verified, on-demand.</p> -->
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <button class="btn btn-primary-custom btn-lg px-4 pulse-btn"><i class="fas fa-search me-2"></i>Find a Labour</button>
+          <button class="btn btn-outline-custom btn-lg px-4"><i class="fas fa-briefcase me-2"></i>Become a Pro</button>
+        </div>
+        <div class="mt-4 d-flex gap-4 flex-wrap">
+          <div><i class="fas fa-user-check text-primary"></i> <span class="fw-semibold">20k+ verified workers</span></div>
+          <div><i class="fas fa-clock text-primary"></i> <span class="fw-semibold">Same-day booking</span></div>
+          <div><i class="fas fa-rupee-sign text-primary"></i> <span class="fw-semibold">Best price guarantee</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6 text-center animate-slideRight">
+        <div class="floating-icon">
+          <img src="https://placehold.co/600x420/eef4ff/0a66c2?text=Profix+App+-+All+Labours+Hub&font=montserrat" alt="Profix illustration" class="img-fluid rounded-4 shadow-lg" style="max-width: 100%; border-radius: 2rem;">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Search / Booking Card -->
+<div class="container position-relative" style="margin-top: -2rem; z-index: 10;">
+  <div class="service-card p-4 p-md-5 bg-white">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4 animate-slideLeft">
+        <label class="form-label fw-bold"><i class="fas fa-map-marker-alt text-primary me-1"></i> Your Location</label>
+        <input type="text" class="form-control form-control-lg rounded-pill" placeholder="Enter city / area" value="Mumbai, Andheri">
+      </div>
+      <div class="col-md-5 animate-fadeUp">
+        <label class="form-label fw-bold"><i class="fas fa-tools me-1"></i> Which labour do you need?</label>
+        <select class="form-select form-select-lg rounded-pill">
+          <option>Electrician (wiring, repairs)</option>
+          <option>Plumber (pipes, leakage)</option>
+          <option>Carpenter (furniture, woodwork)</option>
+          <option>Mason / Construction labour</option>
+          <option>Painter (walls, home painting)</option>
+          <option>Helper / House shifting</option>
+          <option>AC / Fridge Technician</option>
+        </select>
+      </div>
+      <div class="col-md-3 animate-slideRight">
+        <button class="btn btn-primary-custom w-100 btn-lg rounded-pill"><i class="fas fa-bolt me-2"></i>Hire Instantly</button>
+      </div>
+    </div>
+    <div class="mt-4 small text-secondary text-center">⭐ 4.85 average rating | 12,500+ jobs completed this month</div>
+  </div>
+</div>
+
+<!-- ALL LABOURS SECTION (Electricians, Plumbers, Helpers, etc) -->
+<section id="labours" class="py-5 mt-4">
+  <div class="container">
+    <div class="text-center mb-5 animate-fadeUp">
+      <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill"><i class="fas fa-people-arrows me-1"></i> Every labour you need</span>
+      <h2 class="display-6 fw-bold mt-3">Skilled & general workers at your service</h2>
+      <p class="text-secondary w-75 mx-auto">From electricians to house helpers — Profix connects you with trusted professionals across all categories.</p>
+    </div>
+    <div class="row g-4">
+      <!-- Row 1: electrician & plumber -->
+      <div class="col-md-6 col-lg-4 animate-slideLeft">
+        <div class="labour-card p-4 h-100 d-flex flex-column">
+          <div class="cat-icon mb-3"><i class="fas fa-bolt fa-2x"></i></div>
+          <h3 class="fw-bold">⚡ Electricians</h3>
+          <p class="text-secondary">Wiring, fuse, smart home, industrial repairs. Licensed professionals.</p>
+          <div class="mt-auto"><button class="btn btn-outline-custom w-100">Book Electrician →</button></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-fadeUp">
+        <div class="labour-card p-4 h-100 d-flex flex-column">
+          <div class="cat-icon mb-3"><i class="fas fa-wrench fa-2x"></i></div>
+          <h3 class="fw-bold">🚰 Plumbers</h3>
+          <p class="text-secondary">Pipe leaks, drain cleaning, bathroom installation, geyser repair.</p>
+          <div class="mt-auto"><button class="btn btn-outline-custom w-100">Book Plumber →</button></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-slideRight">
+        <div class="labour-card p-4 h-100 d-flex flex-column">
+          <div class="cat-icon mb-3"><i class="fas fa-hammer fa-2x"></i></div>
+          <h3 class="fw-bold">🪚 Carpenters</h3>
+          <p class="text-secondary">Furniture making, repair, modular kitchen, door fixing.</p>
+          <div class="mt-auto"><button class="btn btn-outline-custom w-100">Book Carpenter →</button></div>
+        </div>
+      </div>
+      <!-- second row: painter, mason, helper -->
+      <div class="col-md-6 col-lg-4 animate-slideLeft">
+        <div class="labour-card p-4 h-100 d-flex flex-column">
+          <div class="cat-icon mb-3"><i class="fas fa-paint-roller fa-2x"></i></div>
+          <h3 class="fw-bold">🎨 Painters</h3>
+          <p class="text-secondary">Wall textures, waterproofing, exterior/interior painting.</p>
+          <div class="mt-auto"><button class="btn btn-outline-custom w-100">Book Painter →</button></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-fadeUp">
+        <div class="labour-card p-4 h-100 d-flex flex-column">
+          <div class="cat-icon mb-3"><i class="fas fa-hard-hat fa-2x"></i></div>
+          <h3 class="fw-bold">🧱 Masons / Construction</h3>
+          <p class="text-secondary">Brick work, tiling, plastering, renovation labour.</p>
+          <div class="mt-auto"><button class="btn btn-outline-custom w-100">Book Mason →</button></div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-slideRight">
+        <div class="labour-card p-4 h-100 d-flex flex-column">
+          <div class="cat-icon mb-3"><i class="fas fa-truck-moving fa-2x"></i></div>
+          <h3 class="fw-bold">📦 Helpers / Movers</h3>
+          <p class="text-secondary">House shifting, loading/unloading, daily wage helpers.</p>
+          <div class="mt-auto"><button class="btn btn-outline-custom w-100">Hire Helper →</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <button class="btn btn-primary-custom px-5 py-3"><i class="fas fa-phone-alt me-2"></i>Need other labour? Contact us</button>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOMER REVIEWS SECTION (Real user reviews) -->
+<section id="reviews" class="py-5" style="background: #f8faff;">
+  <div class="container">
+    <div class="text-center mb-5 animate-fadeUp">
+      <i class="fas fa-star text-warning fa-2x"></i>
+      <h2 class="display-6 fw-bold mt-2">What our customers say about Profix</h2>
+      <p class="text-secondary">Real reviews from real people who hired labours through our platform</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 animate-slideLeft">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="mt-2 fst-italic">"I urgently needed a plumber for a burst pipe at 11 PM. Profix connected me within 10 mins! The plumber was professional and solved the issue in 30 mins. Highly recommended."</p>
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/men/41.jpg" class="rounded-circle me-3" width="48" alt="user">
+            <div><strong>Fazil</strong><br><span class="small text-secondary">Karachi - Plumber service</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-fadeUp">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="mt-2 fst-italic">"Hired an electrician for full home rewiring. The pricing was transparent and the worker was very skilled. Plus, I could track his arrival like Uber! Profix is a game changer."</p>
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3" width="48" alt="user">
+            <div><strong>Meena K.</strong><br><span class="small text-secondary">Lahore - Electrician</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-slideRight">
+        <div class="review-card">
+          <div class="stars">★★★★½</div>
+          <p class="mt-2 fst-italic">"Needed 2 helpers for shifting furniture and loading. Got them within 2 hours. Polite and hardworking. Will definitely use for any labour needs again."</p>
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/men/55.jpg" class="rounded-circle me-3" width="48" alt="user">
+            <div><strong>Sajid Hussain</strong><br><span class="small text-secondary">Islamabad - Helpers</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-slideLeft">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="mt-2 fst-italic">"Best platform for construction labour. Hired masons and painters for my new office. Quality work and on-time arrival. All workers were verified!"</p>
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/women/33.jpg" class="rounded-circle me-3" width="48" alt="user">
+            <div><strong>Tasleem</strong><br><span class="small text-secondary">Pindi - Mason & Painter</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-fadeUp">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="mt-2 fst-italic">"Amazing experience booking a carpenter for my kitchen cabinets. No middlemen, paid directly through app after satisfaction. Honest pricing and great finish."</p>
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/men/28.jpg" class="rounded-circle me-3" width="48" alt="user">
+            <div><strong>Owais Nadeem</strong><br><span class="small text-secondary">Hyderabad - Carpenter</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 animate-slideRight">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p class="mt-2 fst-italic">"Profix is like Foodpanda but for workers! I found a skilled AC technician in minutes. The ratings and reviews helped me choose the right pro. Love it!"</p>
+          <div class="d-flex align-items-center mt-3">
+            <img src="https://randomuser.me/api/portraits/women/90.jpg" class="rounded-circle me-3" width="48" alt="user">
+            <div><strong>Noor-ul-ain</strong><br><span class="small text-secondary">Nawabshah - AC Repair</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-5">
+      <div class="d-inline-flex bg-white rounded-pill shadow-sm p-2 ps-4">
+        <span class="fw-bold me-3">⭐ 4.85 out of 5 · Based on 3,542 reviews</span>
+        <button class="btn btn-primary-custom rounded-pill">Write a review</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS SECTION -->
+<section id="howitworks" class="py-5">
+  <div class="container">
+    <div class="text-center mb-5 animate-fadeUp">
+      <h2 class="fw-bold display-6">How <span class="text-primary">Profix</span> works</h2>
+      <p class="text-secondary">Get any labour in 3 simple steps — as easy as ordering food online</p>
+    </div>
+    <div class="row g-4 text-center">
+      <div class="col-md-4 animate-fadeUp">
+        <div class="step-circle mx-auto"><i class="fas fa-mobile-alt fs-4"></i></div>
+        <h4 class="fw-bold mt-3">1. Post your requirement</h4>
+        <p class="text-secondary">Tell us what labour you need (electrician, helper, mason, etc.) and your location.</p>
+      </div>
+      <div class="col-md-4 animate-fadeUp" style="animation-delay: 0.15s;">
+        <div class="step-circle mx-auto"><i class="fas fa-user-check fs-4"></i></div>
+        <h4 class="fw-bold mt-3">2. Instant match with pros</h4>
+        <p class="text-secondary">We connect you to verified labours near you with ratings and past reviews.</p>
+      </div>
+      <div class="col-md-4 animate-fadeUp" style="animation-delay: 0.3s;">
+        <div class="step-circle mx-auto"><i class="fas fa-hand-sparkles fs-4"></i></div>
+        <h4 class="fw-bold mt-3">3. Work done & pay</h4>
+        <p class="text-secondary">Labour completes the job, you pay securely. Rate your experience to help others.</p>
+      </div>
+    </div>
+    <div class="text-center mt-5 p-4 bg-white rounded-4 shadow-sm">
+      <img src="https://placehold.co/800x100/eef4ff/0a66c2?text=Step+by+Step+Process:+Request+→+Assign+→+Complete" class="img-fluid rounded-3" alt="steps">
+    </div>
+  </div>
+</section>
+
+<!-- Why Profix + Stats -->
+<section class="py-5 bg-white">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6 order-lg-1 order-2 animate-slideLeft">
+        <div class="p-3">
+          <i class="fas fa-chart-line fa-2x text-primary mb-3"></i>
+          <h3 class="fw-bold">Pakistan's most trusted labour network</h3>
+          <ul class="list-unstyled mt-3">
+            <li class="mb-2"><i class="fas fa-check-circle text-primary me-2"></i> <strong>Verified background</strong> – Every labour is ID verified</li>
+            <li class="mb-2"><i class="fas fa-clock text-primary me-2"></i> <strong>Real-time tracking</strong> – Know when your pro arrives</li>
+            <li class="mb-2"><i class="fas fa-rupee-sign text-primary me-2"></i> <strong>No bargaining hassle</strong> – Fixed pricing upfront</li>
+            <li class="mb-2"><i class="fas fa-headset text-primary me-2"></i> <strong>24/7 support</strong> – We're here for any issue</li>
+          </ul>
+          <button class="btn btn-primary-custom mt-2">Explore all labours <i class="fas fa-arrow-right ms-2"></i></button>
+        </div>
+      </div>
+      <div class="col-lg-6 order-lg-2 order-1 text-center animate-slideRight mb-4 mb-lg-0">
+        <div class="floating-icon">
+          <div class="bg-primary bg-opacity-10 p-5 rounded-5 d-inline-block">
+            <i class="fas fa-users fa-4x text-primary"></i>
+            <h2 class="fw-bold mt-3">20,000+</h2>
+            <p class="text-secondary">Active labours across Pakistan</p>
+            <hr class="w-50 mx-auto">
+            <p><i class="fas fa-map-marker-alt text-primary"></i> 50+ cities</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact & CTA -->
+<section id="contact" class="py-5" style="background: linear-gradient(110deg, #0a66c2 0%, #0a2540 100%); color: white;">
+  <div class="container text-center py-4">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <h2 class="fw-bold display-6">Ready to hire the best labour?</h2>
+        <p class="lead opacity-90">Join thousands of happy customers who find reliable workers on Profix — electricians, plumbers, carpenters, helpers and more.</p>
+        <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+          <button class="btn btn-light btn-lg rounded-pill px-4 fw-bold text-primary"><i class="fab fa-google-play me-2"></i> Get App (Soon)</button>
+          <button class="btn btn-outline-light btn-lg rounded-pill px-4"><i class="fas fa-envelope me-2"></i> Request a Quote</button>
+        </div>
+        <div class="mt-5 small">
+          <i class="fas fa-phone-alt me-2"></i> +91 3372 324142 &nbsp;|&nbsp; <i class="fas fa-envelope"></i> pro.fix.founder@gmail.com
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="pt-5 pb-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <h4 class="fw-bold text-white">profix</h4>
+        <p class="small">On-demand labour marketplace — connecting homes with skilled & general workers.</p>
+        <div class="d-flex gap-3">
+          <a href="#" class="text-white-50 fs-5"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-white-50 fs-5"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-white-50 fs-5"><i class="fab fa-instagram"></i></a>
+        </div>
+      </div>
+      <div class="col-md-2 mb-4">
+        <h6 class="fw-bold">For Customers</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-white-50 text-decoration-none">How to hire</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Pricing</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Safety guide</a></li>
+        </ul>
+      </div>
+      <div class="col-md-2 mb-4">
+        <h6 class="fw-bold">For Workers</h6>
+        <ul class="list-unstyled small">
+          <li><a href="#" class="text-white-50 text-decoration-none">Become a pro</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Earnings</a></li>
+          <li><a href="#" class="text-white-50 text-decoration-none">Support</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4 mb-4">
+        <h6 class="fw-bold">Stay updated</h6>
+        <div class="input-group">
+          <input type="email" class="form-control form-control-sm rounded-start" placeholder="Your email">
+          <button class="btn btn-primary btn-sm rounded-end">Subscribe</button>
+        </div>
+        <p class="small mt-2 text-white-50">Get early access to app & discounts.</p>
+      </div>
+    </div>
+    <hr class="opacity-25">
+    <div class="text-center small text-white-50">© 2025 Profix — Every Problem's Solution At Your Doorstep, anytime. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
